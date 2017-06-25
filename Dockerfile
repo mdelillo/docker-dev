@@ -42,12 +42,17 @@ RUN add-apt-repository ppa:neovim-ppa/stable && \
         python-pip \
         python3-dev \
         python3-setuptools
-RUN easy_install3 pip
+RUN easy_install3 pip && \
+      pip2 install --user neovim && \
+      pip3 install --user neovim
 RUN update-alternatives --install /usr/bin/vi vi /usr/bin/nvim 60 && \
       update-alternatives --config vi && \
       update-alternatives --install /usr/bin/vim vim /usr/bin/nvim 60 && \
       update-alternatives --config vim && \
       update-alternatives --install /usr/bin/editor editor /usr/bin/nvim 60 && \
       update-alternatives --config editor
+
+RUN git clone https://github.com/luan/vimfiles $HOME/.vim && \
+      $HOME/.vim/update
 
 CMD ["/bin/bash"]
