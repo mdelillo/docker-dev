@@ -34,4 +34,20 @@ RUN echo "source /usr/local/share/chruby/chruby.sh" >> $HOME/.bashrc
 RUN echo "source /usr/local/share/chruby/auto.sh" >> $HOME/.bashrc
 RUN echo "ruby-${ruby_version}" > /.ruby-version
 
+RUN add-apt-repository ppa:neovim-ppa/stable && \
+      apt-get -y update && \
+      apt-get -y install \
+        neovim \
+        python-dev \
+        python-pip \
+        python3-dev \
+        python3-setuptools
+RUN easy_install3 pip
+RUN update-alternatives --install /usr/bin/vi vi /usr/bin/nvim 60 && \
+      update-alternatives --config vi && \
+      update-alternatives --install /usr/bin/vim vim /usr/bin/nvim 60 && \
+      update-alternatives --config vim && \
+      update-alternatives --install /usr/bin/editor editor /usr/bin/nvim 60 && \
+      update-alternatives --config editor
+
 CMD ["/bin/bash"]
