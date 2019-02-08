@@ -1,9 +1,9 @@
 FROM mdelillo/base
 
-ARG golang_version=1.8.3
-ARG ruby_version=2.4.1
+ARG golang_version=1.11.5
+ARG ruby_version=2.6.1
 ARG chruby_version=0.3.9
-ARG ruby_install_version=0.6.1
+ARG ruby_install_version=0.7.0
 
 RUN apt-add-repository ppa:git-core/ppa && \
       apt-get -y update && \
